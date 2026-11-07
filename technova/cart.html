@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart — TechNova Premium Electronics</title>
+  <meta name="description" content="Review your selected TechNova products, apply promo codes, and complete your secure checkout.">
+
+  <!-- Google Fonts: Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- TechNova Global Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Universal Navbar
+       ======================================================================== -->
+  <nav class="navbar navbar-expand-lg navbar-technova">
+    <div class="container">
+      <a class="navbar-brand-tech" href="index.html">
+        <div class="brand-icon">
+          <i class="bi bi-cpu-fill"></i>
+        </div>
+        <span>Tech<span class="text-primary">Nova</span></span>
+      </a>
+
+      <div class="d-flex align-items-center gap-2 order-lg-last">
+        <a href="products.html" class="nav-icon-btn d-none d-sm-flex" title="Search Products" aria-label="Search">
+          <i class="bi bi-search"></i>
+        </a>
+        <a href="cart.html" class="nav-icon-btn position-relative" title="Shopping Cart" aria-label="Shopping Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-counter-badge">0</span>
+        </a>
+        <button class="navbar-toggler border-0 p-1 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTechNovaNav" aria-controls="navbarTechNovaNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-list fs-2 text-dark"></i>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarTechNovaNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
+          <li class="nav-item">
+            <a class="nav-link nav-link-tech" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-tech" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-tech" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-tech" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       Cart Header & Breadcrumbs
+       ======================================================================== -->
+  <header class="py-4 bg-light border-bottom">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-1">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+        </ol>
+      </nav>
+      <h1 class="fw-bold mb-0">Your Shopping Cart</h1>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Main Cart Content Area
+       ======================================================================== -->
+  <main class="py-5 bg-white">
+    <div class="container">
+
+      <!-- 1. EMPTY CART STATE (Visible when cart is empty) -->
+      <div id="cart-empty-view" class="empty-cart-state" style="display: none;">
+        <div class="empty-cart-icon">
+          <i class="bi bi-bag-x"></i>
+        </div>
+        <h3 class="fw-bold text-dark mb-2">Your Shopping Bag is Empty</h3>
+        <p class="text-muted max-w-500 mx-auto mb-4">
+          Looks like you haven't added any TechNova devices or accessories yet. Explore our latest flagship arrivals to get started.
+        </p>
+        <a href="products.html" class="btn btn-primary btn-lg">
+          <i class="bi bi-grid-fill"></i> Explore All Products
+        </a>
+      </div>
+
+      <!-- 2. FILLED CART STATE (Visible when items exist in localStorage) -->
+      <div id="cart-filled-view" class="row g-4">
+
+        <!-- Left Column: Cart Items Table -->
+        <div class="col-lg-8">
+          <div class="cart-table-card">
+            <div class="table-responsive">
+              <table class="table cart-table mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 45%;">Product</th>
+                    <th scope="col" style="width: 15%;">Price</th>
+                    <th scope="col" style="width: 20%;">Quantity</th>
+                    <th scope="col" style="width: 15%;">Total</th>
+                    <th scope="col" style="width: 5%;" class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="cart-table-items">
+                  <!-- Dynamically populated via script.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="p-3 bg-light border-top d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <a href="products.html" class="btn btn-sm btn-outline-custom">
+                <i class="bi bi-arrow-left"></i> Continue Shopping
+              </a>
+              <button id="clear-cart-all-btn" class="btn btn-sm btn-outline-danger">
+                <i class="bi bi-trash"></i> Empty Entire Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Promo Code Card -->
+          <div class="card border rounded-4 p-4 mt-4 shadow-sm bg-light">
+            <h6 class="fw-bold text-dark mb-2">Have a Promotional Code?</h6>
+            <form id="promo-code-form" class="d-flex gap-2">
+              <input type="text" id="promo-code-input" class="form-control text-uppercase" placeholder="Enter coupon code (e.g. TECHNOVA10)" required>
+              <button type="submit" class="btn btn-dark text-nowrap">Apply Code</button>
+            </form>
+            <div id="promo-code-feedback" class="small mt-2">
+              <span class="text-muted"><i class="bi bi-info-circle"></i> Try <strong>TECHNOVA10</strong> for 10% off or <strong>SPRING25</strong> for 25% off.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Order Summary Card -->
+        <div class="col-lg-4">
+          <div class="order-summary-card">
+            <h4 class="fw-bold text-dark mb-4 pb-2 border-bottom">Order Summary</h4>
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span class="fw-bold text-dark" id="summary-subtotal">$0</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span class="fw-bold text-success" id="summary-shipping">FREE</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Estimated Tax (8%)</span>
+              <span class="fw-bold text-dark" id="summary-tax">$0</span>
+            </div>
+
+            <div class="summary-row text-success" id="summary-discount-row" style="display: none;">
+              <span>Discount Applied</span>
+              <span class="fw-bold" id="summary-discount">-$0</span>
+            </div>
+
+            <div class="summary-row total">
+              <span>Estimated Total</span>
+              <span class="text-primary" id="summary-total">$0</span>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-lg w-100 mb-3" data-bs-toggle="modal" data-bs-target="#checkoutModal">
+              <i class="bi bi-lock-fill"></i> Proceed to Checkout
+            </button>
+
+            <div class="d-flex flex-column gap-2 text-center text-muted small">
+              <div class="d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-shield-check text-success"></i>
+                <span>Bank-grade 256-Bit SSL Encryption</span>
+              </div>
+              <div class="d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-box-seam text-primary"></i>
+                <span>Complimentary 2-Day Express Delivery</span>
+              </div>
+              <div class="d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-arrow-repeat text-dark"></i>
+                <span>30-Day Risk-Free Returns</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       Checkout Demo Modal
+       ======================================================================== -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content rounded-4 border-0 shadow-xl">
+        <div class="modal-header border-bottom p-4">
+          <div class="d-flex align-items-center gap-2">
+            <div class="brand-icon" style="width: 32px; height: 32px; font-size: 1rem;">
+              <i class="bi bi-cpu-fill"></i>
+            </div>
+            <h5 class="modal-title fw-bold" id="checkoutModalLabel">TechNova Express Checkout</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-target="#checkoutModal" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form id="checkout-demo-form" class="needs-validation" novalidate>
+          <div class="modal-body p-4">
+            <div class="row g-3">
+              <div class="col-12">
+                <h6 class="fw-bold text-dark border-bottom pb-2 mb-3">1. Shipping Details</h6>
+              </div>
+
+              <div class="col-md-6">
+                <label for="shipName" class="form-label small fw-bold">Full Name *</label>
+                <input type="text" class="form-control" id="shipName" placeholder="e.g. Eleanor Vance" required>
+                <div class="invalid-feedback">Please enter your full name.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="shipEmail" class="form-label small fw-bold">Email Address *</label>
+                <input type="email" class="form-control" id="shipEmail" placeholder="eleanor@example.com" required>
+                <div class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+
+              <div class="col-12">
+                <label for="shipAddress" class="form-label small fw-bold">Street Address *</label>
+                <input type="text" class="form-control" id="shipAddress" placeholder="450 Innovation Parkway, Apt 4B" required>
+                <div class="invalid-feedback">Please enter your shipping address.</div>
+              </div>
+
+              <div class="col-md-5">
+                <label for="shipCity" class="form-label small fw-bold">City *</label>
+                <input type="text" class="form-control" id="shipCity" placeholder="Palo Alto" required>
+                <div class="invalid-feedback">Please enter your city.</div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="shipState" class="form-label small fw-bold">State / Region *</label>
+                <input type="text" class="form-control" id="shipState" placeholder="California" required>
+                <div class="invalid-feedback">Please enter state.</div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="shipZip" class="form-label small fw-bold">ZIP Code *</label>
+                <input type="text" class="form-control" id="shipZip" placeholder="94304" required>
+                <div class="invalid-feedback">Required.</div>
+              </div>
+
+              <div class="col-12 pt-3">
+                <h6 class="fw-bold text-dark border-bottom pb-2 mb-3">2. Payment Method (Simulation)</h6>
+              </div>
+
+              <div class="col-12">
+                <div class="p-3 bg-light rounded-3 border d-flex align-items-center justify-content-between mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentOption" id="payCredit" checked>
+                    <label class="form-check-label fw-bold small" for="payCredit">
+                      Credit / Debit Card
+                    </label>
+                  </div>
+                  <div class="d-flex gap-2 fs-5 text-muted">
+                    <i class="bi bi-credit-card-2-front text-primary"></i>
+                    <i class="bi bi-apple"></i>
+                    <i class="bi bi-google"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="cardNum" class="form-label small fw-bold">Card Number *</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-credit-card"></i></span>
+                  <input type="text" class="form-control" id="cardNum" placeholder="4532 •••• •••• 8892" required>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="cardExp" class="form-label small fw-bold">Expiration Date *</label>
+                <input type="text" class="form-control" id="cardExp" placeholder="MM/YY (e.g. 11/28)" required>
+              </div>
+
+              <div class="col-md-6">
+                <label for="cardCvv" class="form-label small fw-bold">Security CVV *</label>
+                <input type="password" maxlength="4" class="form-control" id="cardCvv" placeholder="•••" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer border-top p-4">
+            <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary px-4">
+              <i class="bi bi-lock-fill"></i> Complete Order
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Order Confirmation Success Modal
+       ======================================================================== -->
+  <div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 p-4 text-center shadow-xl">
+        <div class="toast-icon success mx-auto mb-3" style="width: 64px; height: 64px; font-size: 2rem;">
+          <i class="bi bi-check2-circle"></i>
+        </div>
+        <h3 class="fw-bold text-dark mb-2">Order Confirmed!</h3>
+        <p class="text-muted mb-3">
+          Thank you for choosing TechNova. Your hardware is being prepared for express delivery.
+        </p>
+        <div class="p-3 bg-light rounded-3 border mb-4">
+          <small class="text-muted d-block">Order Reference Number</small>
+          <strong class="fs-4 text-primary" id="order-number-display">TN-849201</strong>
+        </div>
+        <p class="small text-muted mb-4">
+          A receipt and tracking link have been dispatched to your email address.
+        </p>
+        <a href="products.html" class="btn btn-primary btn-lg w-100">
+          Continue Browsing TechNova
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Universal Footer
+       ======================================================================== -->
+  <footer class="footer-technova">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="footer-brand-title">
+            <div class="brand-icon">
+              <i class="bi bi-cpu-fill"></i>
+            </div>
+            <span>Tech<span class="text-primary">Nova</span></span>
+          </div>
+          <p class="footer-desc">
+            Technology That Moves You Forward. Designing and manufacturing premium consumer electronics with zero-compromise engineering and sustainable materials.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="#" class="footer-social-link" title="Twitter / X" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="footer-social-link" title="Instagram" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="footer-social-link" title="LinkedIn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="footer-social-link" title="YouTube" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="footer-social-link" title="GitHub" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="footer-heading">Shop</h5>
+          <ul class="footer-links">
+            <li><a href="products.html?category=smartphones">Smartphones</a></li>
+            <li><a href="products.html?category=laptops">Laptops</a></li>
+            <li><a href="products.html?category=audio">Audio & ANC</a></li>
+            <li><a href="products.html?category=wearables">Wearables</a></li>
+            <li><a href="products.html?category=gaming">Gaming Accessories</a></li>
+            <li><a href="products.html?category=accessories">Docks & Displays</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="footer-heading">Company</h5>
+          <ul class="footer-links">
+            <li><a href="about.html">About TechNova</a></li>
+            <li><a href="about.html#values">Brand Mission</a></li>
+            <li><a href="about.html#team">Leadership Team</a></li>
+            <li><a href="contact.html">Careers & News</a></li>
+            <li><a href="about.html">Sustainability</a></li>
+            <li><a href="contact.html">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="footer-heading">Customer Care</h5>
+          <ul class="footer-links">
+            <li><a href="contact.html">24/7 Help Center</a></li>
+            <li><a href="contact.html#faq">Shipping & Returns</a></li>
+            <li><a href="cart.html">Track Your Order</a></li>
+            <li><a href="contact.html#faq">2-Year Warranty</a></li>
+            <li><a href="contact.html">Corporate Sales</a></li>
+            <li><a href="contact.html">Contact Support</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="footer-heading">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="cart.html">View Cart</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+            <li><a href="products.html?search=sale">Sale Items</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 TechNova Electronics Inc. All rights reserved. Technology That Moves You Forward.
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="text-muted small">Accepted Payments:</span>
+          <i class="bi bi-credit-card-2-front fs-5 text-light" title="Visa / MasterCard"></i>
+          <i class="bi bi-apple fs-5 text-light" title="Apple Pay"></i>
+          <i class="bi bi-google fs-5 text-light" title="Google Pay"></i>
+          <i class="bi bi-shield-lock-fill fs-5 text-light" title="256-Bit SSL Encryption"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- TechNova Master Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>
+

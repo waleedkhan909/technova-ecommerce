@@ -1,0 +1,27 @@
+# ============================================================
+#  TechNova — .gitignore
+# ============================================================
+
+# Screenshots (generated assets, not source code)
+screenshots/
+technova/screenshots/
+
+# PDF exports
+pdf/
+technova/pdf/
+
+# VS Code workspace settings
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary / scratch files
+*.tmp
+*.log
+*.bak
+
+# Python scripts used for asset generation
+*.py

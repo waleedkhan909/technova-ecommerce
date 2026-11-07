@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products — TechNova Premium Electronics</title>
+  <meta name="description" content="Explore TechNova's complete collection of premium smartphones, laptops, audio systems, wearables, and gaming accessories.">
+
+  <!-- Google Fonts: Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- TechNova Global Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Universal Navbar
+       ======================================================================== -->
+  <nav class="navbar navbar-expand-lg navbar-technova">
+    <div class="container">
+      <a class="navbar-brand-tech" href="index.html">
+        <div class="brand-icon">
+          <i class="bi bi-cpu-fill"></i>
+        </div>
+        <span>Tech<span class="text-primary">Nova</span></span>
+      </a>
+
+      <div class="d-flex align-items-center gap-2 order-lg-last">
+        <a href="products.html" class="nav-icon-btn d-none d-sm-flex" title="Search Products" aria-label="Search">
+          <i class="bi bi-search"></i>
+        </a>
+        <a href="cart.html" class="nav-icon-btn position-relative" title="Shopping Cart" aria-label="Shopping Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-counter-badge">0</span>
+        </a>
+        <button class="navbar-toggler border-0 p-1 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTechNovaNav" aria-controls="navbarTechNovaNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-list fs-2 text-dark"></i>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarTechNovaNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
+          <li class="nav-item">
+            <a class="nav-link nav-link-tech" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-tech active" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-tech" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-tech" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       Page Header & Breadcrumbs
+       ======================================================================== -->
+  <header class="shop-hero">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-2">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Products Catalog</li>
+        </ol>
+      </nav>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+        <div>
+          <h1 class="fw-bold mb-1">Explore Products</h1>
+          <p class="text-muted mb-0">Discover our curated lineup of next-generation consumer electronics.</p>
+        </div>
+        <div class="mt-3 mt-md-0">
+          <span id="results-count-text" class="text-muted fw-semibold small">Showing 12 of 12 products</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Main Catalog Section: Sidebar + Product Grid
+       ======================================================================== -->
+  <main class="py-5 bg-white">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Left Filter Sidebar -->
+        <aside class="col-lg-3">
+          <div class="filter-sidebar">
+            <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+              <h5 class="fw-bold mb-0">Filters</h5>
+              <button id="reset-filters-btn" class="btn btn-sm btn-link text-decoration-none p-0 text-primary">
+                Reset All
+              </button>
+            </div>
+
+            <!-- Search Group -->
+            <div class="filter-group">
+              <div class="filter-title">Search</div>
+              <div class="search-input-group">
+                <i class="bi bi-search"></i>
+                <input type="text" id="product-search-input" class="form-control" placeholder="Search devices, chips...">
+              </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="filter-group">
+              <div class="filter-title">Categories</div>
+              <div class="d-flex flex-column gap-1">
+                <div class="category-filter-item active" data-category="all">
+                  <span>All Categories</span>
+                  <span class="count-badge">12</span>
+                </div>
+                <div class="category-filter-item" data-category="smartphones">
+                  <span>Smartphones</span>
+                  <span class="count-badge">2</span>
+                </div>
+                <div class="category-filter-item" data-category="laptops">
+                  <span>Laptops</span>
+                  <span class="count-badge">2</span>
+                </div>
+                <div class="category-filter-item" data-category="audio">
+                  <span>Audio & ANC</span>
+                  <span class="count-badge">2</span>
+                </div>
+                <div class="category-filter-item" data-category="wearables">
+                  <span>Wearables</span>
+                  <span class="count-badge">1</span>
+                </div>
+                <div class="category-filter-item" data-category="gaming">
+                  <span>Gaming Accessories</span>
+                  <span class="count-badge">2</span>
+                </div>
+                <div class="category-filter-item" data-category="tablets">
+                  <span>Tablets</span>
+                  <span class="count-badge">1</span>
+                </div>
+                <div class="category-filter-item" data-category="accessories">
+                  <span>Computer Accessories</span>
+                  <span class="count-badge">2</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Price Range Filter -->
+            <div class="filter-group">
+              <div class="filter-title">Price Range</div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="priceFilter" id="priceAll" value="all" checked>
+                <label class="form-check-label small" for="priceAll">All Prices</label>
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="priceFilter" id="price1" value="under-200">
+                <label class="form-check-label small" for="price1">Under $200</label>
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="priceFilter" id="price2" value="200-500">
+                <label class="form-check-label small" for="price2">$200 — $500</label>
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="priceFilter" id="price3" value="500-1000">
+                <label class="form-check-label small" for="price3">$500 — $1,000</label>
+              </div>
+              <div class="form-check mb-0">
+                <input class="form-check-input" type="radio" name="priceFilter" id="price4" value="over-1000">
+                <label class="form-check-label small" for="price4">Over $1,000</label>
+              </div>
+            </div>
+
+            <!-- Promotion Highlight -->
+            <div class="p-3 bg-light rounded-3 mt-4 text-center">
+              <i class="bi bi-percent fs-3 text-primary mb-1 d-block"></i>
+              <div class="fw-bold small mb-1">Student & Educator Discount</div>
+              <p class="text-muted" style="font-size: 0.75rem; margin-bottom: 0.5rem;">Save an additional 10% on laptops and tablets with promo code <strong>TECHNOVA10</strong>.</p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Products Grid Content -->
+        <section class="col-lg-9">
+          <!-- Controls Bar -->
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 p-3 bg-light rounded-3 border">
+            <div class="d-flex align-items-center gap-2">
+              <span class="text-muted small fw-bold text-uppercase">Sort By:</span>
+              <select id="product-sort-select" class="form-select form-select-sm" style="width: auto; min-width: 170px;">
+                <option value="featured">Featured / Best Match</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name-az">Name: A to Z</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
+            <div class="text-muted small">
+              <i class="bi bi-truck text-primary me-1"></i> Free express shipping on orders over $100
+            </div>
+          </div>
+
+          <!-- Dynamic Products Catalog Grid -->
+          <div class="row g-4" id="products-catalog-grid">
+            <!-- Dynamically populated via script.js -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       Universal Footer
+       ======================================================================== -->
+  <footer class="footer-technova">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="footer-brand-title">
+            <div class="brand-icon">
+              <i class="bi bi-cpu-fill"></i>
+            </div>
+            <span>Tech<span class="text-primary">Nova</span></span>
+          </div>
+          <p class="footer-desc">
+            Technology That Moves You Forward. Designing and manufacturing premium consumer electronics with zero-compromise engineering and sustainable materials.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="#" class="footer-social-link" title="Twitter / X" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="footer-social-link" title="Instagram" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="footer-social-link" title="LinkedIn" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="footer-social-link" title="YouTube" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="footer-social-link" title="GitHub" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="footer-heading">Shop</h5>
+          <ul class="footer-links">
+            <li><a href="products.html?category=smartphones">Smartphones</a></li>
+            <li><a href="products.html?category=laptops">Laptops</a></li>
+            <li><a href="products.html?category=audio">Audio & ANC</a></li>
+            <li><a href="products.html?category=wearables">Wearables</a></li>
+            <li><a href="products.html?category=gaming">Gaming Accessories</a></li>
+            <li><a href="products.html?category=accessories">Docks & Displays</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="footer-heading">Company</h5>
+          <ul class="footer-links">
+            <li><a href="about.html">About TechNova</a></li>
+            <li><a href="about.html#values">Brand Mission</a></li>
+            <li><a href="about.html#team">Leadership Team</a></li>
+            <li><a href="contact.html">Careers & News</a></li>
+            <li><a href="about.html">Sustainability</a></li>
+            <li><a href="contact.html">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="footer-heading">Customer Care</h5>
+          <ul class="footer-links">
+            <li><a href="contact.html">24/7 Help Center</a></li>
+            <li><a href="contact.html#faq">Shipping & Returns</a></li>
+            <li><a href="cart.html">Track Your Order</a></li>
+            <li><a href="contact.html#faq">2-Year Warranty</a></li>
+            <li><a href="contact.html">Corporate Sales</a></li>
+            <li><a href="contact.html">Contact Support</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 class="footer-heading">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="cart.html">View Cart</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Get In Touch</a></li>
+            <li><a href="products.html?search=sale">Sale Items</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 TechNova Electronics Inc. All rights reserved. Technology That Moves You Forward.
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="text-muted small">Accepted Payments:</span>
+          <i class="bi bi-credit-card-2-front fs-5 text-light" title="Visa / MasterCard"></i>
+          <i class="bi bi-apple fs-5 text-light" title="Apple Pay"></i>
+          <i class="bi bi-google fs-5 text-light" title="Google Pay"></i>
+          <i class="bi bi-shield-lock-fill fs-5 text-light" title="256-Bit SSL Encryption"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- TechNova Master Script -->
+  <script src="js/script.js"></script>
+</body>
+</html>
+
